@@ -1,1 +1,42 @@
-# test
+      * Slapto pirkejo informacine sistema. / vadybininkas, klientas-imones_direktorius, slaptas pirkejas(, darbo tvarkarastis), ataskaita, suvestine *
+
+      Savybes:
+      	klientas (imones direktorius) gali uzsiregistruoti sistemoje
+      	*klientas gali prisijungti prie sistemos
+      	*klientas gali matyti dalinius slaptu pirkeju profilius
+      	*klientas gali pasirinkti norimus slaptus pirkejus savo imonei
+      	*klientas gali atlikti resursu uzsakyma: uzsisakyti keleta slaptu pirkeju, kurie patikrintu jo imones darbuotoju aptarnavimo kokybe
+      	klientas gali perziureti jam sugeneruota suvestine
+      	klientas gali perziureti suvestines ataskaitas
+      	klientas turi gauti pranesima el. pastu, kai jo uzsakymas yra atliktas (sugeneruota suvestine)
+
+      	vadybininkas gali prisijungti prie sistemos
+      	vadybininkas gali matyti pilnus slaptu pirkeju profilius
+      	vadybininkas gali redaguoti pasirinkto slapto pirkejo profili
+      	vadybininkas gali uzsiregistruoti nauja slapta pirkeja
+      	vadybininkas gali istrinti slapta pirkeja
+      	vadybininkas gali patvirtinti naujo slapto pirkejo (kandidato) registracija
+      	vadybininkas gali atmesti naujo slapto pirkejo (kandidato) registracija
+
+      	vadybininkas gali matyti visas pasirinkto slapto pirkejo ataskaitas
+      	vadybininkas gali matyti visas pasirinkto kliento ataskaitas
+      	vadybininkas gali matyti pasirinkto kliento suvestine
+
+      	vadybininkas gali uzregistruoti klienta sistemoje
+      	vadybininkas gali matyti klientu sarasa
+      	vadybininkas gali redaguoti pasirinkto kliento informacija
+      	vadybininkas gali istrinti klienta
+
+      	vadybininkas turi gauti pranesima el. pastu, kai uzsiregistruoja naujas slaptas pirkejas (kandidatas)
+      	vadybininkas turi gauti pranesima el. pastu, kai uzsiregistruoja naujas klientas
+
+      	slaptas pirkejas gali uzsiregistruoti sistemoje
+      	*slaptas pirkejas gali prisijungti prie sistemos
+      	slaptas pirkejas gali atnaujinti tam tikra informacija apie save
+      	*slaptas pirkejas gali matyti jam priskirto kliento uzsakyma
+      	*slaptas pirkejas gali uzpildyti kliento darbuotoju patikrinimo (slapto apsipirkimo) ataskaita
+
+      	slaptas pirkejas turi gauti pranesima el. pastu, kai jo kandidatura patvirtinama
+      	slaptas pirkejas turi gauti pranesima el. pastu, kai jo kandidatura atmetama
+
+      	suvestine klientui automatiskai sugeneruojama is ataskaitu
