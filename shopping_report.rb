@@ -1,0 +1,3 @@
+class ShoppingReport
+  
+end
