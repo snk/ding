@@ -4,6 +4,7 @@ require "matchers"
 describe ShoppingReport do
   before(:each) do
     @report = ShoppingReport.new(
+            1,
             Date.parse("2009-10-15"),
             Date.parse("2009-10-27"),
             "Apsipirkimu likau nelabai patenkintas. Darbuotoja Z.B. elgesi nelabai mandagiai.",
