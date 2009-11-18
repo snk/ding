@@ -14,6 +14,6 @@ class SpyShopper < User
   end
 
   attr :tasks 
-  attr :age
-  attr :occupation
+  attr :age, true
+  attr :occupation, true
 end

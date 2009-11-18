@@ -7,7 +7,9 @@ class ShoppingReport
     @evaluation = evaluation
   end
   
-  attr_reader :order_id, :assign_date, :complete_date, :description, :evaluation
+  attr_reader :order_id, :assign_date, :complete_date
+  attr :description, true
+  attr :evaluation, true
 
 
   @list = {}

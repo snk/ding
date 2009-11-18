@@ -27,6 +27,18 @@ describe SpyShopper do
     @spy.occupation.should be_instance_of(String)
   end
   
+  it "should be able to change age" do
+    @spy.should respond_to(:age=)
+  end
+  
+  it "should be able to change occupation" do
+    @spy.should respond_to(:occupation=)
+  end
+  
+  it "should NOT be able to change assigned tasks" do
+    @spy.should_not respond_to(:tasks=)
+  end  
+  
   it "should be a kind of User" do
     @spy.should be_kind_of(User)
   end

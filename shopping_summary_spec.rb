@@ -14,4 +14,9 @@ describe ShoppingSummary do
     @summary.should respond_to :reports
     @summary.reports.should be_instance_of(Array)
   end
+  
+  it "should NOT be able to change average evaluation" do
+    @summary.should_not respond_to(:average_evaluation=)
+  end
+
 end

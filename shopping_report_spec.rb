@@ -32,4 +32,16 @@ describe ShoppingReport do
     @report.evaluation.should be_instance_of(Fixnum)
     @report.evaluation.should apply_interval(1, 10)
   end
+  
+  it "should be able to change description" do
+    @report.should respond_to(:description=)
+  end
+  
+  it "should be able to change evaluation" do
+    @report.should respond_to(:evaluation=)
+  end
+  
+  it "should NOT be able to change assign date" do
+    @report.should_not respond_to(:assign_date=)
+  end  
 end

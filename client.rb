@@ -12,8 +12,8 @@ class Client < User
       
   end
   
-  attr :company
-  attr :address
+  attr :company, true
+  attr :address, true
   attr :spy_shoppers
   
 end
