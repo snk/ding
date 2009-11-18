@@ -8,8 +8,8 @@ class SpyShopper < User
     @tasks = {}
   end
 
-  def add_report(order_id, assign_date, complete_date, description, evaluation)
-    report = ShoppingReport.new(order_id, assign_date, complete_date, description, evaluation)
+  def add_report(task_id, assign_date, complete_date, description, evaluation)
+    report = ShoppingReport.new(task_id, assign_date, complete_date, description, evaluation)
     ShoppingReport.add(report)  
   end
 
