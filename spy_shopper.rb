@@ -1,9 +1,11 @@
 require "user"
 
 class SpyShopper < User
-  def initialize(username, password)
-    super(username, password)
-    @orders = {}
+  def initialize(login, password, age, occupation)
+    super(login, password)
+    @age = age
+    @occupation = occupation
+    @tasks = {}
   end
 
   def add_report(order_id, assign_date, complete_date, description, evaluation)
@@ -11,5 +13,7 @@ class SpyShopper < User
     ShoppingReport.add(report)  
   end
 
-  attr :orders
+  attr :tasks 
+  attr :age
+  attr :occupation
 end
