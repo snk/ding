@@ -64,17 +64,78 @@ class Ding
   
   def client_menu(user)
     puts "1. View spy shoppers list"
+    puts "2. View my company info"
+    puts "3. Update my company info"
+    puts "4. Add task for spy shopper"
+    
     while true
       command = gets.chomp.strip
       
       case command
-        when "1": User.spy_shoppers.each { |login, spy| print login.ljust(10), " - ", spy.occupation, ", age: ", spy.age, "\n" }
+        when "1": 
+          print_spy_shoppers_list
+          
+        when "2": 
+          puts user.company, user.address
+          
+        when "3": 
+          puts "Company name: "
+          user.company = gets.chomp.strip
+          puts "Address: "
+          user.address = gets.chomp.strip
+          
+          User.db[user.login] = user
+          puts "Info successfully updated"
+          
+        when "4": 
+          puts "Choose spy shopper (enter login): "
+          print_spy_shoppers_list
+          login = gets.chomp.strip
+          
+          if User.exists(login) && User.db[login].is_spy_shopper
+            spy = User.db[login]
+            
+            puts "Describe your task: "
+            description = gets.chomp.strip
+            
+            spy.add_task(user, description)
+            User.db[spy.login] = spy
+            puts "Task successfully added"
+            
+          else
+            puts "Login does not exists"
+          end
+
       end
       break if command == "0"
+    end
+  end
+  
+  def print_spy_shoppers_list
+    User.spy_shoppers.each { |login, spy| print login.ljust(10), " - ", spy.occupation, ", age: ", spy.age, "\n" }
+  end
+  
+  Db_name = "db.yaml"
+  
+  def save
+    file = File.new(Db_name, "w")
+    dump = Marshal.dump(User.db)
+    file.write(dump)
+    file.close
+  end
+  
+  def load
+    if File.exists? Db_name
+      file = File.open(Db_name, "r")
+      dump = file.read(File.size(Db_name))
+      User.db = Marshal.load(dump)
+      file.close
     end
   end
 end
 
 system = Ding.new
-system.init
+#system.init
+system.load
 system.authorization
+system.save
