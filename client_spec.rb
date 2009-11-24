@@ -28,6 +28,10 @@ describe Client do
     @client.spy_shoppers.should be_instance_of(Array)
   end
   
+  it "should be able to add task for spy shoppers" do
+    @client.should respond_to :add_task
+  end
+  
   it "should NOT be able to change spy shoppers list" do
     @client.should_not respond_to(:spy_shoppers=)
   end

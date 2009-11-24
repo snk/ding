@@ -5,7 +5,7 @@ class SpyShopper < User
     super(login, password)
     @age = age
     @occupation = occupation
-    @tasks = {}
+    @tasks = []
   end
 
   def add_report(task_id, assign_date, complete_date, description, evaluation)

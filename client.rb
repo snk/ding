@@ -12,6 +12,10 @@ class Client < User
       
   end
   
+  def add_task(spy_shoppers, notes)
+    
+  end
+  
   attr :company, true
   attr :address, true
   attr :spy_shoppers
