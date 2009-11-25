@@ -71,6 +71,7 @@ describe Client do
     @client.should respond_to :add_task
     @client.add_balance(-500)
     lambda { @client.add_task(nil, nil) }.should raise_error
+    @client.balance_valid.should be_false
   end
   
   it "should NOT be able to change spy shoppers list" do

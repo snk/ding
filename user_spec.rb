@@ -1,4 +1,5 @@
 require "user"
+require "matchers"
 
 describe User do
   before(:each) do
@@ -12,8 +13,7 @@ describe User do
 
   it "should have a MD5 encoded password" do
     @user.should respond_to(:password)
-    @user.password.should be_instance_of(String)
-    @user.password.length.should == 32
+    @user.password.should be_MD5
   end
   
   it "should have status" do
