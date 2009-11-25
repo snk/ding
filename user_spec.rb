@@ -61,4 +61,8 @@ describe User, "as a users DB" do
   it "should be able to get list of SpyShoppers" do
     User.should respond_to(:spy_shoppers)
   end
+  
+  it "should be able to get list of Clients" do
+    User.should respond_to(:clients)
+  end
 end  

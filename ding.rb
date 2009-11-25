@@ -12,14 +12,14 @@ class Ding
     puts " - SpyShoppers information system - \n\n"
     
     spy1 = SpyShopper.new('petras', '123', 22, 'Student, university')
-    spy1.tasks[0] = {:client_id => 3, :description => "aplankyti musu kavine, tarp 10 ir 12 val ryto per pika"}
     spy2 = SpyShopper.new('jonas', '123', 25, 'Programmer, IT company')
-    
     client = Client.new('cili', '123', "Cili Pica", "Laisves pr. 44, Vilnius")
+    manager = Manager.new('manager', '123')
     
     User.insert(spy1)
     User.insert(spy2)
     User.insert(client)
+    User.insert(manager)
   end
   
   def authorization
@@ -31,7 +31,7 @@ class Ding
       password = gets.chomp.strip
       
       if User.valid(login, password)
-        puts "\nChoose command (enter number or type 0 to exit): "
+        puts "\nChoose command (enter number or type 'exit' to exit): "
         
         user = User.db[login]
         if user.is_spy_shopper
@@ -58,7 +58,59 @@ class Ding
       case command
         when "1": user.tasks.each { |task| print task[:description], "\n"}
       end
-      break if command == "0"
+      break if command == "exit"
+    end
+  end
+  
+  def manager_menu(user)
+    puts "1. View client list"
+    puts "2. Add clients balance"
+    puts "3. Set clients service cost and max allowed debt"
+    
+    while true
+      command = gets.chomp.strip
+      
+      case command
+        when "1": 
+          print_clients_list
+          
+        when "2": 
+          puts "Choose client (enter login): "
+          print_clients_list
+
+          login = gets.chomp.strip
+          if User.exists(login) && User.db[login].is_client
+            puts "Enter amount (Lt): "
+            amount = gets.chomp.strip.to_i
+            client = User.db[login]
+            client.add_balance(amount)
+            User.db[login] = client
+            User
+            puts "Balance successfully added"
+            print "New balance: ", User.db[login].balance, " Lt\n"
+          else
+            puts "Login does not exists"
+          end
+          
+        when "3":
+          puts "Choose client (enter login): "
+          print_clients_list
+
+          login = gets.chomp.strip
+          if User.exists(login) && User.db[login].is_client
+            puts "Enter service cost (Lt): "
+            cost = gets.chomp.strip.to_i
+            puts "Enter max allowed debt (Lt): "
+            debt = gets.chomp.strip.to_i
+            
+            User.db[login].service_cost = cost
+            User.db[login].max_debt = debt
+            puts "Info successfully added"
+          else
+            puts "Login does not exists"
+          end
+      end
+      break if command == "exit"
     end
   end
   
@@ -67,6 +119,7 @@ class Ding
     puts "2. View my company info"
     puts "3. Update my company info"
     puts "4. Add task for spy shopper"
+    puts "5. View my balance history"
     
     while true
       command = gets.chomp.strip
@@ -77,6 +130,9 @@ class Ding
           
         when "2": 
           puts user.company, user.address
+          print "Balance: ", user.balance, " Lt\n"
+          print "Max debt: ", user.max_debt, " Lt\n"
+          print "Service cost: ", user.service_cost, " Lt\n"
           
         when "3": 
           puts "Company name: "
@@ -95,19 +151,26 @@ class Ding
           if User.exists(login) && User.db[login].is_spy_shopper
             spy = User.db[login]
             
-            puts "Describe your task: "
-            description = gets.chomp.strip
+            if user.balance_valid
+              puts "Describe your task: "
+              description = gets.chomp.strip
             
-            spy.add_task(user, description)
-            User.db[spy.login] = spy
-            puts "Task successfully added"
-            
+              user.add_task(spy, description)
+              User.db[spy.login] = spy
+              puts "Task successfully added"
+            else
+              puts "Your balance with max debt is too small for new task"
+            end            
           else
             puts "Login does not exists"
           end
-
+          
+        when "5":
+          print "Current balance: ", user.balance, " Lt\n"
+          puts "History: "
+          user.balance_log.each { |log| print log["time"], "   ", log["amount"], " Lt\n" }
       end
-      break if command == "0"
+      break if command == "exit"
     end
   end
   
@@ -115,7 +178,14 @@ class Ding
     User.spy_shoppers.each { |login, spy| print login.ljust(10), " - ", spy.occupation, ", age: ", spy.age, "\n" }
   end
   
-  Db_name = "db.yaml"
+  def print_clients_list
+    User.clients.each do |login, client| 
+      print login.ljust(10), " - ", client.company, " (", client.address, ") - balance: ", 
+      client.balance," Lt, max debt: ", client.max_debt," Lt, service cost: ", client.service_cost," Lt\n"
+    end
+  end
+  
+  Db_name = "db.yml"
   
   def save
     file = File.new(Db_name, "w")

@@ -60,6 +60,16 @@ class User
     list
   end
   
+  def User.clients
+    list = {}
+    @db.each do |key, value|
+      if value.is_client
+        list[key] = value
+      end
+    end
+    list
+  end
+  
 end
 
 

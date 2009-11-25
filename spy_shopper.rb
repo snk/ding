@@ -13,9 +13,9 @@ class SpyShopper < User
     ShoppingReport.add(report)  
   end
   
-  def add_task(client, description)
-    @tasks.push({:client_id => client.id, :description => description})
-  end
+#  def add_task(client, description)
+#    @tasks.push({:client_id => client.id, :description => description})
+#  end
 
   attr :tasks 
   attr :age, true
