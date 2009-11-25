@@ -56,7 +56,11 @@ class Ding
       command = gets.chomp.strip
       
       case command
-        when "1": user.tasks.each { |task| print task[:description], "\n"}
+        when "1": 
+          user.tasks.each_with_index do |task, id|
+            
+            print id + 1, ". ", task["description"], "\n"
+          end
       end
       break if command == "exit"
     end
@@ -120,6 +124,7 @@ class Ding
     puts "3. Update my company info"
     puts "4. Add task for spy shopper"
     puts "5. View my balance history"
+    puts "6. View my assigned tasks"
     
     while true
       command = gets.chomp.strip
@@ -169,6 +174,11 @@ class Ding
           print "Current balance: ", user.balance, " Lt\n"
           puts "History: "
           user.balance_log.each { |log| print log["time"], "   ", log["amount"], " Lt\n" }
+          
+        when "6": 
+          user.assigned_tasks.each do |task| 
+            print task["spy_shopper"].occupation, ", age: ", task["spy_shopper"].age, " - ", task["description"], "\n"
+          end
       end
       break if command == "exit"
     end

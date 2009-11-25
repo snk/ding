@@ -46,6 +46,16 @@ class User
     !@db[login].nil?
   end
   
+  def User.by_id(id)
+    u = nil
+    @db.each do |key, value|
+      if value.id == id
+        u = value
+      end
+    end
+    u
+  end
+  
   def User.valid(login, password)
     @db[login].password == Digest::MD5.hexdigest(password) and @db[login].status == "active"
   end

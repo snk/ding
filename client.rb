@@ -31,9 +31,28 @@ class Client < User
     @balance + @max_debt >= @service_cost
   end
   
+  def real_balance_valid
+    @balance >= 0
+  end
+  
   def add_balance(amount)
     @balance_log.push({"time" => Time.now.strftime("%Y-%m-%d %H:%M:%S"), "amount" => amount})
     @balance += amount
+  end
+  
+  def assigned_tasks
+    list = []
+    User.db.each_pair do |login, user|
+      if user.is_spy_shopper
+        user.tasks.each do |task|
+          if task["client_id"] == self.id
+            task["spy_shopper"] = user
+            list.push(task)
+          end
+        end
+      end
+    end
+    list
   end
   
   attr_accessor :company, :address, :max_debt, :service_cost

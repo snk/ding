@@ -52,6 +52,13 @@ describe User, "as a users DB" do
     User.exists("some-bad-login").should be_false
   end
   
+  it "should be able to find user by id" do
+    u = User.new("Man", "111")
+    User.insert(u)
+    id = User.db[u.login].id
+    User.db[u.login].should eql(User.by_id(id))
+  end
+  
   it "should be able to validate login and password" do
     User.should respond_to(:valid)
     User.valid("Person", "123").should be_true

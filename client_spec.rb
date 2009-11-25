@@ -3,6 +3,12 @@ require "client"
 describe Client do  
   before(:each) do
     @client = Client.new("bosas", "boss22", "Swedbank lizingas", "Gelezinio vilko g. 18A")
+    User.insert(@client)
+    @client = User.db[@client.login]
+  end
+  
+  after(:each) do
+    User.db.delete("bosas")
   end
   
   it "should have a company name" do
@@ -72,6 +78,27 @@ describe Client do
     @client.add_balance(-500)
     lambda { @client.add_task(nil, nil) }.should raise_error
     @client.balance_valid.should be_false
+  end
+  
+  it "should be able to access assigned tasks" do
+    task = "Aplankyti musu parduotuve piko metu savaitgali, tarp 14 ir 16 valandos."
+    @client.should respond_to :assigned_tasks
+    @client.add_balance(500)
+    
+    spy = SpyShopper.new("mykolas", "111", "Student", "20")
+    User.insert(spy)
+    spy = User.db[spy.login]
+    @client.add_task(spy, task)
+    @client.assigned_tasks[0]["description"].should eql(task)
+  end
+  
+  it "should be able to check if real balance is valid" do
+    @client.should respond_to :real_balance_valid
+    @client.add_balance(500)
+    @client.real_balance_valid.should be_true
+    
+    @client.add_balance(-1000)
+    @client.real_balance_valid.should be_false
   end
   
   it "should NOT be able to change spy shoppers list" do
