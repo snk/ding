@@ -1,9 +1,11 @@
-require "rake"
-require "spec/rake/spectask"
- 
-desc "default"
-Spec::Rake::SpecTask.new("default") do |task|
-  task.spec_files = FileList["*_spec.rb"]
-  task.rcov = true
-  task.rcov_opts = ['-i', 'client.rb,manager.rb,shopping_report.rb,spy_shopper.rb,shopping_summary.rb,user.rb']
+require 'rake'
+require 'spec/rake/spectask'
+
+namespace :spec do
+  desc "Run specs with RCov"
+  Spec::Rake::SpecTask.new('rcov') do |t|
+    t.spec_files = FileList['*_spec.rb']
+    t.rcov = true
+    t.rcov_opts = ['--no-rcovrt']
+  end
 end

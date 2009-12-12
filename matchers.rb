@@ -4,6 +4,12 @@ Spec::Matchers.define :apply_interval do |min, max|
   end
 end
 
+Spec::Matchers.define :apply_symbols do |arr|
+  match do |val|
+    arr.include? val
+  end
+end
+
 Spec::Matchers.define :be_MD5 do
   match do |md5|
     md5.length == 32 and md5.instance_of? String and md5 =~ /^[a-f0-9]+$/

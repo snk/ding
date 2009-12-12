@@ -1,27 +1,18 @@
 class ShoppingReport
-  def initialize(task_id, assign_date, complete_date, description, evaluation)
-    @task_id = task_id
-    @assign_date = assign_date
-    @complete_date = complete_date
-    @description = description
-    @evaluation = evaluation
+  
+  attr_accessor :date_start, :date_end, :kindness, :knowledge, :service, :tidiness, :attitude, :activity, :selling, :politeness
+  
+  def initialize(params)
+    @date_start = params[:date_start]
+    @date_end = params[:date_end]
+    @kindness = params[:kindness]
+    @knowledge = params[:knowledge]
+    @service = params[:service]
+    @tidiness = params[:tidiness]
+    @attitude = params[:attitude]
+    @activity = params[:activity]
+    @selling = params[:selling]
+    @politeness = params[:politeness]
   end
   
-  attr_reader :task_id, :assign_date, :complete_date
-  attr :description, true
-  attr :evaluation, true
-
-
-  @list = {}
-  class << self
-    attr :list, true
-  end
-
-  def ShoppingReport.add(report)
-    if !@list.keys.include? report.task_id
-      @list[report.task_id] = [report];
-    else
-      @list[report.task_id].push(report)
-    end
-  end
 end
