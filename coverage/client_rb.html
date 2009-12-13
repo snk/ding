@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="client_rb.html">client.rb</a></td>
-            <td class='right_align'><tt>57</tt></td>
-            <td class='right_align'><tt>47</tt></td>
+            <td class='right_align'><tt>73</tt></td>
+            <td class='right_align'><tt>61</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -153,7 +153,7 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line17">17</a>   def add_task(spy_shopper, description)</pre></td>
+            <td><pre><a name="line17">17</a>   def add_task(task)</pre></td>
           </tr>
         
           
@@ -164,8 +164,8 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line19">19</a>       #spy_shopper.tasks &lt;&lt; {&quot;client_id&quot; =&gt; self.id, &quot;description&quot; =&gt; description}</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line19">19</a>       ShoppingTask.insert(task)</pre></td>
           </tr>
         
           
@@ -213,7 +213,7 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line27">27</a>     @balance + @max_debt &gt;= 0</pre></td>
+            <td><pre><a name="line27">27</a>     @balance + @max_debt - @service_cost &gt;= 0</pre></td>
           </tr>
         
           
@@ -231,13 +231,13 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line30">30</a>   def real_balance_valid</pre></td>
+            <td><pre><a name="line30">30</a>   def max_balance</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line31">31</a>     @balance &gt;= 0</pre></td>
+            <td><pre><a name="line31">31</a>     @balance + @max_debt</pre></td>
           </tr>
         
           
@@ -255,151 +255,247 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line34">34</a>   def add_balance(amount)</pre></td>
+            <td><pre><a name="line34">34</a>   def real_balance_valid</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line35">35</a>     @balance_log &lt;&lt; {:time =&gt; Time.now.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;), :amount =&gt; amount}</pre></td>
+            <td><pre><a name="line35">35</a>     @balance &gt;= 0</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line36">36</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line37">37</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line36">36</a>     @balance += amount</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line37">37</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line38">38</a>   </pre></td>
+            <td><pre><a name="line38">38</a>   def add_balance(amount)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line39">39</a>   def assigned_tasks</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line40">40</a>     list = []</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line41">41</a>     User.db.each_pair do |login, user|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line42">42</a>       if user.is_spy_shopper</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line43">43</a>         user.tasks.each do |task|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line44">44</a>           if task[&quot;client_id&quot;] == self.id</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line45">45</a>             task[&quot;spy_shopper&quot;] = user</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line46">46</a>             list.push(task)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line47">47</a>           end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line48">48</a>         end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line49">49</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line50">50</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line51">51</a>     list</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line52">52</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line53">53</a>   </pre></td>
+            <td><pre><a name="line39">39</a>     @balance_log &lt;&lt; {:time =&gt; Time.now.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;), :amount =&gt; amount}</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line54">54</a>   attr_accessor :company, :address, :max_debt, :service_cost</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line55">55</a>   attr_reader :spy_shoppers, :balance, :balance_log</pre></td>
+            <td><pre><a name="line40">40</a>     @balance += amount</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line56">56</a>   </pre></td>
+            <td><pre><a name="line41">41</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line42">42</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line57">57</a> end</pre></td>
+            <td><pre><a name="line43">43</a>   def balance_log_positive</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line44">44</a>     list = []</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line45">45</a>     balance_log.each { |b| list &lt;&lt; b unless b[:amount] &lt; 0 }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line46">46</a>     list</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line47">47</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line48">48</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line49">49</a>   def balance_log_negative</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line50">50</a>     list = []</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line51">51</a>     balance_log.each { |b| list &lt;&lt; b unless b[:amount] &gt;= 0 }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line52">52</a>     list</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line54">54</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line55">55</a>   def assigned_tasks</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line56">56</a>     list = []</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line57">57</a>     User.db.each_pair do |login, user|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line58">58</a>       if user.is_spy_shopper</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line59">59</a>         user.tasks.each do |task|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line60">60</a>           if task[&quot;client_id&quot;] == self.id</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line61">61</a>             task[&quot;spy_shopper&quot;] = user</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a>             list.push(task)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line64">64</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line65">65</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line66">66</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line67">67</a>     list</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line68">68</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line69">69</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line70">70</a>   attr_accessor :company, :address, :max_debt, :service_cost</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line71">71</a>   attr_reader :spy_shoppers, :balance, :balance_log</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line72">72</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line73">73</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on 2009-12-13 15:21:55 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
+    <p>Generated on 2009-12-13 21:35:13 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
 
   </body>
 </html>

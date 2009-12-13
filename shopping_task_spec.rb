@@ -112,7 +112,16 @@ describe ShoppingTask, "as a tasks DB" do
   end
   
   it "should be able to insert report" do
-    ShoppingTask.should respond_to :insert_report
+    ShoppingTask.should respond_to :insert_report    
+    @client = Client.new("klientas", "pass", "company name", "company address")
+    @spy = SpyShopper.new("spy", "pass", 22, "Programmer, IT company")
+    @task = ShoppingTask.new(
+      client: @client,
+      spy: @spy,
+      spy_date: DateTime.parse("2009-12-25 11:00:00"),
+      description: "Aplankyti musu kavine per pirmaja kaledu diena",
+      status: "P"
+    )    
     @report = ShoppingReport.new(
       date_start: Date.parse("2009-11-25 12:15:00"),
       date_end: Date.parse("2009-11-25 13:15:00"),

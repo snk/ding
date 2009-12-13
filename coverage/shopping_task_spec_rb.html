@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="shopping_task_spec_rb.html">shopping_task_spec.rb</a></td>
-            <td class='right_align'><tt>132</tt></td>
-            <td class='right_align'><tt>114</tt></td>
+            <td class='right_align'><tt>141</tt></td>
+            <td class='right_align'><tt>123</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -741,115 +741,169 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line115">115</a>     ShoppingTask.should respond_to :insert_report</pre></td>
+            <td><pre><a name="line115">115</a>     ShoppingTask.should respond_to :insert_report    </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line116">116</a>     @report = ShoppingReport.new(</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line117">117</a>       date_start: Date.parse(&quot;2009-11-25 12:15:00&quot;),</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line118">118</a>       date_end: Date.parse(&quot;2009-11-25 13:15:00&quot;),</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line119">119</a>       kindness: 8,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line120">120</a>       knowledge: 9,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line121">121</a>       service: 7,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line122">122</a>       tidiness: 10,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line123">123</a>       attitude: 5,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line124">124</a>       activity: 4,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line125">125</a>       selling: 6,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line126">126</a>       politeness: 5</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line127">127</a>     )</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line128">128</a>     </pre></td>
+            <td><pre><a name="line116">116</a>     @client = Client.new(&quot;klientas&quot;, &quot;pass&quot;, &quot;company name&quot;, &quot;company address&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line129">129</a>     ShoppingTask.insert_report(@task, @report)</pre></td>
+            <td><pre><a name="line117">117</a>     @spy = SpyShopper.new(&quot;spy&quot;, &quot;pass&quot;, 22, &quot;Programmer, IT company&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line130">130</a>     ShoppingTask.client(@client)[0].report.should eql(@report)</pre></td>
+            <td><pre><a name="line118">118</a>     @task = ShoppingTask.new(</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line131">131</a>   end  </pre></td>
+            <td><pre><a name="line119">119</a>       client: @client,</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line132">132</a> end</pre></td>
+            <td><pre><a name="line120">120</a>       spy: @spy,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line121">121</a>       spy_date: DateTime.parse(&quot;2009-12-25 11:00:00&quot;),</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line122">122</a>       description: &quot;Aplankyti musu kavine per pirmaja kaledu diena&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line123">123</a>       status: &quot;P&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line124">124</a>     )    </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line125">125</a>     @report = ShoppingReport.new(</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line126">126</a>       date_start: Date.parse(&quot;2009-11-25 12:15:00&quot;),</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line127">127</a>       date_end: Date.parse(&quot;2009-11-25 13:15:00&quot;),</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line128">128</a>       kindness: 8,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line129">129</a>       knowledge: 9,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line130">130</a>       service: 7,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line131">131</a>       tidiness: 10,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line132">132</a>       attitude: 5,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line133">133</a>       activity: 4,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line134">134</a>       selling: 6,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line135">135</a>       politeness: 5</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line136">136</a>     )</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line137">137</a>     </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line138">138</a>     ShoppingTask.insert_report(@task, @report)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line139">139</a>     ShoppingTask.client(@client)[0].report.should eql(@report)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line140">140</a>   end  </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line141">141</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on 2009-12-13 15:21:55 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
+    <p>Generated on 2009-12-13 21:35:13 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
 
   </body>
 </html>

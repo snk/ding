@@ -28,7 +28,7 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="shopping_task_rb.html">shopping_task.rb</a></td>
-            <td class='right_align'><tt>45</tt></td>
+            <td class='right_align'><tt>44</tt></td>
             <td class='right_align'><tt>34</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
@@ -212,122 +212,116 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line27">27</a>     # gal kartais sitos zemiau komandos turetu buti UI ir sitas metodas nereikalingas?</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line27">27</a>     @tasks.delete(task)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line28">28</a>     @tasks.delete(task)</pre></td>
+            <td><pre><a name="line28">28</a>     task.report = report</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line29">29</a>     task.report = report</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line30">30</a>     @tasks &lt;&lt; task</pre></td>
+            <td><pre><a name="line29">29</a>     @tasks &lt;&lt; task</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line31">31</a>   end</pre></td>
+            <td><pre><a name="line30">30</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line32">32</a>   </pre></td>
+            <td><pre><a name="line31">31</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line33">33</a>   def ShoppingTask.client(client)</pre></td>
+            <td><pre><a name="line32">32</a>   def ShoppingTask.client(client)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line34">34</a>     list = []</pre></td>
+            <td><pre><a name="line33">33</a>     list = []</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line35">35</a>     tasks.each { |task| list &lt;&lt; task unless task.client != client }</pre></td>
+            <td><pre><a name="line34">34</a>     @tasks.each { |task| list &lt;&lt; task unless task.client.login != client.login }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line36">36</a>     list</pre></td>
+            <td><pre><a name="line35">35</a>     list</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line37">37</a>   end</pre></td>
+            <td><pre><a name="line36">36</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line38">38</a>   </pre></td>
+            <td><pre><a name="line37">37</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line39">39</a>   def ShoppingTask.spy(spy)</pre></td>
+            <td><pre><a name="line38">38</a>   def ShoppingTask.spy(spy)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line40">40</a>     list = []</pre></td>
+            <td><pre><a name="line39">39</a>     list = []</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line41">41</a>     tasks.each { |task| list &lt;&lt; task unless task.spy != spy }</pre></td>
+            <td><pre><a name="line40">40</a>     @tasks.each { |task| list &lt;&lt; task unless task.spy.login != spy.login }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line42">42</a>     list</pre></td>
+            <td><pre><a name="line41">41</a>     list</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line43">43</a>   end</pre></td>
+            <td><pre><a name="line42">42</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line44">44</a>   </pre></td>
+            <td><pre><a name="line43">43</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line45">45</a> end</pre></td>
+            <td><pre><a name="line44">44</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on 2009-12-13 15:21:55 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
+    <p>Generated on 2009-12-13 21:35:13 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
 
   </body>
 </html>

@@ -2,7 +2,7 @@ require "user"
 
 class SpyShopper < User
   
-  attr_accessor :age, :occupation, :bonus_percent, :bonus_log
+  attr_accessor :age, :occupation, :bonus_percent, :bonus_log, :schedule
   
   def initialize(login, password, age, occupation)
     super(login, password)
@@ -10,6 +10,7 @@ class SpyShopper < User
     @occupation = occupation
     @bonus_percent = 0.05
     @bonus_log = []
+    @schedule = SpySchedule.new
   end
 
   def add_report(task_id, assign_date, complete_date, description, evaluation)

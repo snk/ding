@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="spy_schedule_spec_rb.html">spy_schedule_spec.rb</a></td>
-            <td class='right_align'><tt>15</tt></td>
-            <td class='right_align'><tt>12</tt></td>
+            <td class='right_align'><tt>30</tt></td>
+            <td class='right_align'><tt>25</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -135,19 +135,109 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line14">14</a> </pre></td>
+            <td><pre><a name="line14">14</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line15">15</a>   it &quot;should be able to list schedule of this week and next week&quot; do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line16">16</a>     @schedule.should respond_to :current</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line17">17</a>     now = Time.now</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line18">18</a>     current_week = now.strftime(&quot;%W&quot;).to_i</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line19">19</a>     old_week = current_week - 1</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line20">20</a>     next_week = current_week + 1</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line15">15</a> end</pre></td>
+            <td><pre><a name="line21">21</a>     </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line22">22</a>     lambda { @schedule.add(now.year, old_week, 1, &quot;08:00&quot;, &quot;20:00&quot;) }.should_not change(@schedule.current, :length).by(1)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line23">23</a>     @schedule.current.length.should eql(0)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line24">24</a>     @schedule.add(now.year, current_week, 1, &quot;12:00&quot;, &quot;14:00&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line25">25</a>     @schedule.current.length.should eql(1)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line26">26</a>     @schedule.add(now.year, next_week, 1, &quot;18:00&quot;, &quot;20:00&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line27">27</a>     @schedule.current.length.should eql(2)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line28">28</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line29">29</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line30">30</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on 2009-12-13 15:21:55 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
+    <p>Generated on 2009-12-13 21:35:13 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
 
   </body>
 </html>

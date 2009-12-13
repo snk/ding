@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="spy_shopper_rb.html">spy_shopper.rb</a></td>
-            <td class='right_align'><tt>27</tt></td>
-            <td class='right_align'><tt>19</tt></td>
+            <td class='right_align'><tt>28</tt></td>
+            <td class='right_align'><tt>20</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -81,7 +81,7 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line5">5</a>   attr_accessor :age, :occupation, :bonus_percent, :bonus_log</pre></td>
+            <td><pre><a name="line5">5</a>   attr_accessor :age, :occupation, :bonus_percent, :bonus_log, :schedule</pre></td>
           </tr>
         
           
@@ -128,98 +128,104 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line13">13</a>   end</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line13">13</a>     @schedule = SpySchedule.new</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line14">14</a> </pre></td>
+            <td><pre><a name="line14">14</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line15">15</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line15">15</a>   def add_report(task_id, assign_date, complete_date, description, evaluation)</pre></td>
+            <td><pre><a name="line16">16</a>   def add_report(task_id, assign_date, complete_date, description, evaluation)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line16">16</a>     #report = ShoppingReport.new(task_id, assign_date, complete_date, description, evaluation)</pre></td>
+            <td><pre><a name="line17">17</a>     #report = ShoppingReport.new(task_id, assign_date, complete_date, description, evaluation)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line17">17</a>     #ShoppingReport.add(report)</pre></td>
+            <td><pre><a name="line18">18</a>     #ShoppingReport.add(report)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line18">18</a>   end</pre></td>
+            <td><pre><a name="line19">19</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line19">19</a>   </pre></td>
+            <td><pre><a name="line20">20</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line20">20</a>   def add_bonus(task)</pre></td>
+            <td><pre><a name="line21">21</a>   def add_bonus(task)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line21">21</a>     service_cost = task.client.service_cost</pre></td>
+            <td><pre><a name="line22">22</a>     service_cost = task.client.service_cost</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line22">22</a>     count = service_cost * @bonus_percent</pre></td>
+            <td><pre><a name="line23">23</a>     count = service_cost * @bonus_percent</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line23">23</a>     bonus = { task: task, bonus_percent: @bonus_percent, service_cost: service_cost, bonus: count }</pre></td>
+            <td><pre><a name="line24">24</a>     bonus = { task: task, bonus_percent: @bonus_percent, service_cost: service_cost, bonus: count }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line24">24</a>     bonus_log &lt;&lt; bonus</pre></td>
+            <td><pre><a name="line25">25</a>     bonus_log &lt;&lt; bonus</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line25">25</a>   end</pre></td>
+            <td><pre><a name="line26">26</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line26">26</a> </pre></td>
+            <td><pre><a name="line27">27</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line27">27</a> end</pre></td>
+            <td><pre><a name="line28">28</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on 2009-12-13 15:21:55 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
+    <p>Generated on 2009-12-13 21:35:13 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
 
   </body>
 </html>

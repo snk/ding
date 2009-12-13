@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="spy_shopper_spec_rb.html">spy_shopper_spec.rb</a></td>
-            <td class='right_align'><tt>68</tt></td>
-            <td class='right_align'><tt>55</tt></td>
+            <td class='right_align'><tt>74</tt></td>
+            <td class='right_align'><tt>60</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -273,199 +273,235 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line37">37</a>   it &quot;should be able to add bonus to bonus log&quot; do</pre></td>
+            <td><pre><a name="line37">37</a>   it &quot;should have a schedule&quot; do</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line38">38</a>     @spy.should respond_to(:add_bonus)</pre></td>
+            <td><pre><a name="line38">38</a>     @spy.should respond_to(:schedule)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line39">39</a>     @client = Client.new(&quot;client&quot;, &quot;pass&quot;, &quot;company name&quot;, &quot;company address&quot;)</pre></td>
+            <td><pre><a name="line39">39</a>     @spy.schedule.should be_instance_of(SpySchedule)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line40">40</a>     @spy = SpyShopper.new(&quot;spy&quot;, &quot;pass&quot;, 22, &quot;Programmer, IT company&quot;)</pre></td>
+            <td><pre><a name="line40">40</a>     @spy.schedule.should_not be_nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line41">41</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line42">42</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line41">41</a>     @task = ShoppingTask.new(</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line42">42</a>       client: @client,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line43">43</a>       spy: @spy,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line44">44</a>       spy_date: DateTime.parse(&quot;2009-12-25 11:00:00&quot;),</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line45">45</a>       description: &quot;Aplankyti musu kavine per pirmaja kaledu diena&quot;,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line46">46</a>       status: &quot;P&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line47">47</a>     )</pre></td>
+            <td><pre><a name="line43">43</a>   it &quot;should be able to add bonus to bonus log&quot; do</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line48">48</a>     @spy.add_bonus(@task)</pre></td>
+            <td><pre><a name="line44">44</a>     @spy.should respond_to(:add_bonus)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line49">49</a>     @spy.bonus_log[0][:bonus].should eql(4.5)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line50">50</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line51">51</a>   </pre></td>
+            <td><pre><a name="line45">45</a>     @client = Client.new(&quot;client&quot;, &quot;pass&quot;, &quot;company name&quot;, &quot;company address&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line52">52</a>   it &quot;should be able to change age&quot; do</pre></td>
+            <td><pre><a name="line46">46</a>     @spy = SpyShopper.new(&quot;spy&quot;, &quot;pass&quot;, 22, &quot;Programmer, IT company&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line53">53</a>     @spy.should respond_to(:age=)</pre></td>
+            <td><pre><a name="line47">47</a>     @task = ShoppingTask.new(</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line54">54</a>   end</pre></td>
+            <td><pre><a name="line48">48</a>       client: @client,</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line55">55</a>   </pre></td>
+            <td><pre><a name="line49">49</a>       spy: @spy,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line50">50</a>       spy_date: DateTime.parse(&quot;2009-12-25 11:00:00&quot;),</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line51">51</a>       description: &quot;Aplankyti musu kavine per pirmaja kaledu diena&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line52">52</a>       status: &quot;P&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a>     )</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line56">56</a>   it &quot;should be able to change occupation&quot; do</pre></td>
+            <td><pre><a name="line54">54</a>     @spy.add_bonus(@task)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line57">57</a>     @spy.should respond_to(:occupation=)</pre></td>
+            <td><pre><a name="line55">55</a>     @spy.bonus_log[0][:bonus].should eql(4.5)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line58">58</a>   end</pre></td>
+            <td><pre><a name="line56">56</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line59">59</a>   </pre></td>
+            <td><pre><a name="line57">57</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line60">60</a>   it &quot;should be able to change bonus percent&quot; do</pre></td>
+            <td><pre><a name="line58">58</a>   it &quot;should be able to change age&quot; do</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line61">61</a>     @spy.should respond_to(:bonus_percent=)</pre></td>
+            <td><pre><a name="line59">59</a>     @spy.should respond_to(:age=)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line62">62</a>   end</pre></td>
+            <td><pre><a name="line60">60</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line63">63</a>   </pre></td>
+            <td><pre><a name="line61">61</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line64">64</a>   it &quot;should be a kind of User&quot; do</pre></td>
+            <td><pre><a name="line62">62</a>   it &quot;should be able to change occupation&quot; do</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line65">65</a>     @spy.should be_kind_of(User)</pre></td>
+            <td><pre><a name="line63">63</a>     @spy.should respond_to(:occupation=)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line66">66</a>   end</pre></td>
+            <td><pre><a name="line64">64</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line67">67</a> </pre></td>
+            <td><pre><a name="line65">65</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line66">66</a>   it &quot;should be able to change bonus percent&quot; do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line67">67</a>     @spy.should respond_to(:bonus_percent=)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line68">68</a> end</pre></td>
+            <td><pre><a name="line68">68</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line69">69</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line70">70</a>   it &quot;should be a kind of User&quot; do</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line71">71</a>     @spy.should be_kind_of(User)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line72">72</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line73">73</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line74">74</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on 2009-12-13 15:21:55 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
+    <p>Generated on 2009-12-13 21:35:13 +0200 with <a href="http://github.com/relevance/rcov">rcov 0.9.6</a></p>
 
   </body>
 </html>

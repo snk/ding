@@ -4,7 +4,8 @@ require "user"
 require "client"
 require "manager"
 require "spy_shopper"
-
+require "spy_schedule"
+require "shopping_task"
 
 class Ding
   
@@ -52,15 +53,43 @@ class Ding
   
   def spy_shopper_menu(user)
     puts "1. View assigned tasks"
+    puts "2. View my schedule"
+    puts "3. Add time to my schedule"
+    
     while true
       command = gets.chomp.strip
       
       case command
         when "1" then
-          user.tasks.each_with_index do |task, id|
-            
-            print id + 1, ". ", task["description"], "\n"
+          
+          ShoppingTask.spy(user).each_with_index { |task, id| print id + 1, ". ", task.description, "\n" }
+          
+        when "2" then
+          print_spy_schedule(user)
+          
+        when "3" then
+          print_spy_schedule(user)
+          puts ""
+          puts "Enter week (this, next): "
+          week = gets.chomp.strip
+          puts "Enter day (1 - Monday, 2 - Tuesday, ...): "
+          day = gets.chomp.strip
+          puts "Enter time interval start (format: hh:mm): "
+          interval_start = gets.chomp.strip
+          puts "Enter time interval end (format: hh:mm): "
+          interval_end = gets.chomp.strip
+          puts "Time interval was added to your schedule"
+          
+          now = Time.now
+          if (week == 'this') then
+            week = now.strftime("%W").to_i
+          elsif (week == 'next') then
+            now = now + (60 * 60 * 24 * 7)
+            week = now.strftime("%W").to_i
           end
+
+          user.schedule.add(now.year, week, day, interval_start, interval_end)
+          
       end
       break if command == "exit"
     end
@@ -89,7 +118,7 @@ class Ding
             client = User.db[login]
             client.add_balance(amount)
             User.db[login] = client
-            User
+            #User
             puts "Balance successfully added"
             print "New balance: ", User.db[login].balance, " Lt\n"
           else
@@ -159,9 +188,42 @@ class Ding
             if user.balance_valid
               puts "Describe your task: "
               description = gets.chomp.strip
-            
-              user.add_task(spy, description)
+              
+              puts "Choose spy shopper time (enter number): "
+              print_spy_schedule(spy)
+              
+              schedule = gets.chomp.strip.to_i
+
+              i = 0
+              spy.schedule.current.each do |s|
+                if s[:week] == 'current' then
+                  i = i + 1
+                  if (i == schedule) then
+                    @date = s[:date]
+                    @week = s[:week]
+                    @time = s[:time]
+                  end
+                end
+              end
+              spy.schedule.current.each do |s|
+                if s[:week] == 'next' then
+                  i = i + 1
+                  if (i == schedule) then
+                    @date = s[:date]
+                    @week = s[:week]
+                    @time = s[:time]
+                  end
+                end
+              end
+              
+              task = ShoppingTask.new({
+                client: user, spy: spy, spy_date: {date: @date, week: @week, time: @time}, description: description, status: 'P'
+              })
+              
+              user.add_task(task)
+              spy.add_bonus(task)
               User.db[spy.login] = spy
+
               puts "Task successfully added"
             else
               puts "Your balance with max debt is too small for new task"
@@ -172,8 +234,12 @@ class Ding
           
         when "5" then
           print "Current balance: ", user.balance, " Lt\n"
-          puts "History: "
-          user.balance_log.each { |log| print log["time"], "   ", log["amount"], " Lt\n" }
+          print "Max balance: ", user.max_balance ," Lt\n\n"
+          puts "Spending history: "
+          user.balance_log_negative.each { |log| print log[:time], "   ", log[:amount], " Lt\n" }
+          puts ""
+          puts "Adding history: "
+          user.balance_log_positive.each { |log| print log[:time], "   ", log[:amount], " Lt\n" }
           
         when "6" then
           user.assigned_tasks.each do |task| 
@@ -195,27 +261,56 @@ class Ding
     end
   end
   
-  Db_name = "db.yml"
+  def print_spy_schedule(user)
+    i = 0
+    puts "This week: "
+    user.schedule.current.each do |s|
+      if s[:week] == 'current' then
+        i = i + 1
+        print i, ". ", s[:date], " ", s[:time], "\n"
+      end
+    end
+    puts "Next week: "
+    user.schedule.current.each do |s|
+      if s[:week] == 'next' then
+        i = i + 1
+        print i, ". ", s[:date], " ", s[:time], "\n"
+      end
+    end
+  end
+  
+  Db_name_users = "db-users.yml"
+  Db_name_tasks = "db-tasks.yml"
   
   def save
-    file = File.new(Db_name, "w")
+    file = File.new(Db_name_users, "w")
     dump = Marshal.dump(User.db)
+    file.write(dump)
+    file.close    
+    file = File.new(Db_name_tasks, "w")
+    dump = Marshal.dump(ShoppingTask.tasks)
     file.write(dump)
     file.close
   end
   
   def load
-    if File.exists? Db_name
-      file = File.open(Db_name, "r")
-      dump = file.read(File.size(Db_name))
+    if File.exists? Db_name_users
+      file = File.open(Db_name_users, "r")
+      dump = file.read(File.size(Db_name_users))
       User.db = Marshal.load(dump)
       file.close
     end
+    if File.exists? Db_name_tasks
+      file = File.open(Db_name_tasks, "r")
+      dump = file.read(File.size(Db_name_tasks))
+      ShoppingTask.tasks = Marshal.load(dump)
+      file.close
+    end    
   end
 end
 
 system = Ding.new
-system.init
-#system.load
+#system.init
+system.load
 system.authorization
 system.save

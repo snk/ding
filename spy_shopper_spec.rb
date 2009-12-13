@@ -34,6 +34,12 @@ describe SpyShopper do
     @spy.bonus_log.should_not be_nil
   end
   
+  it "should have a schedule" do
+    @spy.should respond_to(:schedule)
+    @spy.schedule.should be_instance_of(SpySchedule)
+    @spy.schedule.should_not be_nil
+  end
+  
   it "should be able to add bonus to bonus log" do
     @spy.should respond_to(:add_bonus)
     @client = Client.new("client", "pass", "company name", "company address")

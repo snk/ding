@@ -24,7 +24,6 @@ class ShoppingTask
   end
   
   def ShoppingTask.insert_report(task, report)
-    # gal kartais sitos zemiau komandos turetu buti UI ir sitas metodas nereikalingas?
     @tasks.delete(task)
     task.report = report
     @tasks << task
@@ -32,13 +31,13 @@ class ShoppingTask
   
   def ShoppingTask.client(client)
     list = []
-    tasks.each { |task| list << task unless task.client != client }
+    @tasks.each { |task| list << task unless task.client.login != client.login }
     list
   end
   
   def ShoppingTask.spy(spy)
     list = []
-    tasks.each { |task| list << task unless task.spy != spy }
+    @tasks.each { |task| list << task unless task.spy.login != spy.login }
     list
   end
   
