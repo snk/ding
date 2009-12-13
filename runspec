@@ -1,0 +1,1 @@
+/usr/local/bin/spec *_spec.rb --format specdoc

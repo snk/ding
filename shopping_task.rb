@@ -24,6 +24,7 @@ class ShoppingTask
   end
   
   def ShoppingTask.insert_report(task, report)
+    # gal kartais sitos zemiau komandos turetu buti UI ir sitas metodas nereikalingas?
     @tasks.delete(task)
     task.report = report
     @tasks << task

@@ -7,13 +7,9 @@ describe SpyShopper do
     @spy = SpyShopper.new("pirkejas-petras", "pass", 25, "Studentas")
   end
 
-  it "should be able to access assigned tasks" do
-    @spy.should respond_to(:tasks)
-  end
-
   it "should be able to add the shopping report" do
     @spy.add_report(1, Date.parse("2009-10-28"), Date.parse("2009-10-28"), "Puikus aptarnavimas visomis prasmemis", 10)
-    ShoppingReport.list[1][0].complete_date.should == Date.parse("2009-10-28")
+    #ShoppingReport.list[1][0].complete_date.should == Date.parse("2009-10-28")
   end
   
   it "should have an age between 18 and 50" do
@@ -27,6 +23,32 @@ describe SpyShopper do
     @spy.occupation.should be_instance_of(String)
   end
   
+  it "should have a bonus percent" do
+    @spy.should respond_to(:bonus_percent)
+    @spy.bonus_percent.should be_instance_of(Float)
+  end
+  
+  it "should have a bonus log" do
+    @spy.should respond_to(:bonus_log)
+    @spy.bonus_log.should be_instance_of(Array)
+    @spy.bonus_log.should_not be_nil
+  end
+  
+  it "should be able to add bonus to bonus log" do
+    @spy.should respond_to(:add_bonus)
+    @client = Client.new("client", "pass", "company name", "company address")
+    @spy = SpyShopper.new("spy", "pass", 22, "Programmer, IT company")
+    @task = ShoppingTask.new(
+      client: @client,
+      spy: @spy,
+      spy_date: DateTime.parse("2009-12-25 11:00:00"),
+      description: "Aplankyti musu kavine per pirmaja kaledu diena",
+      status: "P"
+    )
+    @spy.add_bonus(@task)
+    @spy.bonus_log[0][:bonus].should eql(4.5)
+  end
+  
   it "should be able to change age" do
     @spy.should respond_to(:age=)
   end
@@ -35,9 +57,9 @@ describe SpyShopper do
     @spy.should respond_to(:occupation=)
   end
   
-  it "should NOT be able to change assigned tasks" do
-    @spy.should_not respond_to(:tasks=)
-  end  
+  it "should be able to change bonus percent" do
+    @spy.should respond_to(:bonus_percent=)
+  end
   
   it "should be a kind of User" do
     @spy.should be_kind_of(User)

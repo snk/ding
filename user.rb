@@ -26,14 +26,14 @@ class User
   attr :id, true
   
   @db = {}
-  @last_id = 0
+  @id = 0
   class << self
     attr :db, true
   end
   
   def User.insert(user)
-    @last_id +=1
-    user.id = @last_id
+    @id +=1
+    user.id = @id
     
     if @db.keys.include? user.login
       raise "Login already exists"

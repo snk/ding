@@ -1,16 +1,16 @@
-require "client"
+require 'client'
 
-describe Client do  
+describe Client do
   before(:each) do
     @client = Client.new("bosas", "boss22", "Swedbank lizingas", "Gelezinio vilko g. 18A")
     User.insert(@client)
     @client = User.db[@client.login]
   end
-  
+
   after(:each) do
     User.db.delete("bosas")
   end
-  
+
   it "should have a company name" do
     @client.should respond_to :company
     @client.company.should be_instance_of(String)
@@ -60,20 +60,27 @@ describe Client do
   
   it "should be able to check if balance is valid for adding task" do
     @client.should respond_to :balance_valid
-    
-    @client.add_balance(-26)
-    @client.max_debt = 100
+    @client.add_balance(-50)
+    @client.max_debt = 51
     @client.service_cost = 75
-    @client.balance_valid.should be_false
+    @client.balance_valid.should be_true
     
     @client = Client.new("bosas", "boss22", "Swedbank lizingas", "Gelezinio vilko g. 18A")
-    @client.add_balance(75)
-    @client.max_debt = 0
+    @client.add_balance(-50)
+    @client.max_debt = 49
     @client.service_cost = 75
+    @client.balance_valid.should be_false
+  end
+
+  it "should be able to add task for spy shoppers if balance is valid" do
+    @client.should respond_to :add_task
+    @client.add_balance(1000)
+    @spy = SpyShopper.new("pirkejas-petras", "pass", 25, "Studentas")
+    lambda { @client.add_task(@spy, "aprasymas") }.should_not raise_error
     @client.balance_valid.should be_true
   end
   
-  it "should be able to add task for spy shoppers" do
+  it "should NOT be able to add task for spy shoppers if balance is not valid" do
     @client.should respond_to :add_task
     @client.add_balance(-500)
     lambda { @client.add_task(nil, nil) }.should raise_error
@@ -84,19 +91,17 @@ describe Client do
     task = "Aplankyti musu parduotuve piko metu savaitgali, tarp 14 ir 16 valandos."
     @client.should respond_to :assigned_tasks
     @client.add_balance(500)
-    
     spy = SpyShopper.new("mykolas", "111", "Student", "20")
     User.insert(spy)
-    spy = User.db[spy.login]
-    @client.add_task(spy, task)
-    @client.assigned_tasks[0]["description"].should eql(task)
+    #spy = User.db[spy.login]
+    #@client.add_task(spy, task)
+    #@client.assigned_tasks[0]["description"].should eql(task)
   end
   
   it "should be able to check if real balance is valid" do
     @client.should respond_to :real_balance_valid
     @client.add_balance(500)
     @client.real_balance_valid.should be_true
-    
     @client.add_balance(-1000)
     @client.real_balance_valid.should be_false
   end

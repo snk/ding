@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env /usr/local/bin/ruby
 
 require "user"
 require "client"
@@ -56,7 +56,7 @@ class Ding
       command = gets.chomp.strip
       
       case command
-        when "1": 
+        when "1" then
           user.tasks.each_with_index do |task, id|
             
             print id + 1, ". ", task["description"], "\n"
@@ -75,10 +75,10 @@ class Ding
       command = gets.chomp.strip
       
       case command
-        when "1": 
+        when "1" then
           print_clients_list
           
-        when "2": 
+        when "2" then
           puts "Choose client (enter login): "
           print_clients_list
 
@@ -96,7 +96,7 @@ class Ding
             puts "Login does not exists"
           end
           
-        when "3":
+        when "3" then
           puts "Choose client (enter login): "
           print_clients_list
 
@@ -130,16 +130,16 @@ class Ding
       command = gets.chomp.strip
       
       case command
-        when "1": 
+        when "1" then
           print_spy_shoppers_list
           
-        when "2": 
+        when "2" then
           puts user.company, user.address
           print "Balance: ", user.balance, " Lt\n"
           print "Max debt: ", user.max_debt, " Lt\n"
           print "Service cost: ", user.service_cost, " Lt\n"
           
-        when "3": 
+        when "3" then
           puts "Company name: "
           user.company = gets.chomp.strip
           puts "Address: "
@@ -148,7 +148,7 @@ class Ding
           User.db[user.login] = user
           puts "Info successfully updated"
           
-        when "4": 
+        when "4" then
           puts "Choose spy shopper (enter login): "
           print_spy_shoppers_list
           login = gets.chomp.strip
@@ -170,12 +170,12 @@ class Ding
             puts "Login does not exists"
           end
           
-        when "5":
+        when "5" then
           print "Current balance: ", user.balance, " Lt\n"
           puts "History: "
           user.balance_log.each { |log| print log["time"], "   ", log["amount"], " Lt\n" }
           
-        when "6": 
+        when "6" then
           user.assigned_tasks.each do |task| 
             print task["spy_shopper"].occupation, ", age: ", task["spy_shopper"].age, " - ", task["description"], "\n"
           end
@@ -185,7 +185,7 @@ class Ding
   end
   
   def print_spy_shoppers_list
-    User.spy_shoppers.each { |login, spy| print login.ljust(10), " - ", spy.occupation, ", age: ", spy.age, "\n" }
+    User.spy_shoppers.each { |login, spy| print login.ljust(10), " - ", spy.occupation, ", age: ", spy.age, " [tasks done: ", spy.bonus_log.size ,"]\n" }
   end
   
   def print_clients_list
@@ -215,7 +215,7 @@ class Ding
 end
 
 system = Ding.new
-#system.init
-system.load
+system.init
+#system.load
 system.authorization
 system.save

@@ -22,14 +22,20 @@ describe User do
   
   it "should be able to check if it is a SpyShopper" do
     @user.should respond_to(:is_spy_shopper)
+    @spy = SpyShopper.new("pirkejas-petras", "pass", 25, "Studentas")
+    @spy.is_spy_shopper.should be_true
   end
   
   it "should be able to check if it is a Client" do
     @user.should respond_to(:is_client)
+    @client = Client.new("bosas", "boss22", "Swedbank lizingas", "Gelezinio vilko g. 18A")
+    @client.is_client.should be_true
   end
   
   it "should be able to check if it is a Manager" do
     @user.should respond_to(:is_manager)
+    @manager = Manager.new("manager", "manager99")
+    @manager.is_manager.should be_true
   end
 end
 
@@ -44,6 +50,10 @@ describe User, "as a users DB" do
     User.insert(@user)
     User.db.keys.should include("Person")
     User.db["Person"].should == @user
+  end
+  
+  it "should NOT be able to insert users with same login" do
+    lambda { User.insert(@user) }.should raise_error
   end
   
   it "should be able to check if user exists" do
@@ -67,9 +77,15 @@ describe User, "as a users DB" do
   
   it "should be able to get list of SpyShoppers" do
     User.should respond_to(:spy_shoppers)
+    @spy = SpyShopper.new("pirkejas-petras", "pass", 25, "Studentas")
+    User.insert(@spy)
+    User.spy_shoppers.values.should include(@spy)
   end
   
   it "should be able to get list of Clients" do
     User.should respond_to(:clients)
+    @client = Client.new("bosas", "boss22", "Swedbank lizingas", "Gelezinio vilko g. 18A")
+    User.insert(@client)
+    User.clients.values.should include(@client)
   end
 end  

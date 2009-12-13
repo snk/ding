@@ -14,13 +14,9 @@ class Client < User
     @balance_log = []
   end
   
-  def view_spy_shoppers
-      
-  end
-  
   def add_task(spy_shopper, description)
     if balance_valid
-      spy_shopper.tasks.push({"client_id" => self.id, "description" => description})
+      #spy_shopper.tasks << {"client_id" => self.id, "description" => description}
       add_balance(-@service_cost)
     else
       raise "Balance is not valid for adding task"
@@ -28,7 +24,7 @@ class Client < User
   end
   
   def balance_valid
-    @balance + @max_debt >= @service_cost
+    @balance + @max_debt >= 0
   end
   
   def real_balance_valid
@@ -36,7 +32,7 @@ class Client < User
   end
   
   def add_balance(amount)
-    @balance_log.push({"time" => Time.now.strftime("%Y-%m-%d %H:%M:%S"), "amount" => amount})
+    @balance_log << {:time => Time.now.strftime("%Y-%m-%d %H:%M:%S"), :amount => amount}
     @balance += amount
   end
   

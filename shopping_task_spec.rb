@@ -72,9 +72,7 @@ describe ShoppingTask, "as a tasks DB" do
     ShoppingTask.insert(@task)
     ShoppingTask.tasks.should include(@task)
     
-    lambda {
-      ShoppingTask.insert(@task)
-    }.should change(ShoppingTask.tasks, :length).by(1)
+    lambda { ShoppingTask.insert(@task) }.should change(ShoppingTask.tasks, :length).by(1)
   end
   
   it "should be able to list tasks assigned by client" do
